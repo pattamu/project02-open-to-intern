@@ -1,7 +1,6 @@
-
 const mongoose = require('mongoose');
-const internSchema = new mongoose.Schema({
 
+const internSchema = new mongoose.Schema({
 
     name: {
         type: String,
@@ -11,12 +10,14 @@ const internSchema = new mongoose.Schema({
 
     email: {
         type: String,
+        trim: true,
         required: true,
+        lowercase: true,
         unique: true
     },
 
     mobile: {
-        type: Number,
+        type: String,
         required: true,
         unique: true,
     },
@@ -32,9 +33,7 @@ const internSchema = new mongoose.Schema({
         default: false
     },
 
-   },
-
-    { timestamps: true });
+    },{ timestamps: true });
 
 module.exports = mongoose.model('Intern', internSchema)
 
