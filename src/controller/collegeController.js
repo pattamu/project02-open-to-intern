@@ -17,8 +17,6 @@ const createCollege = async function (req, res) {
         
         if (Object.keys(data).length != 0) {
 
-            let a = await collegeModel.find({ name: data.name })
-
             if (!data.name) 
                 return res.status(400).send({ status: false, msg: "plz enter name in short form" })
             
@@ -35,7 +33,8 @@ const createCollege = async function (req, res) {
 
             if(data.logoLink && !urlRegEx.test(data.logoLink.trim()))
                 return res.status(400).send({ status: false, msg: "Please Enter a valid URL for the logoLink."})
-            
+                
+            let a = await collegeModel.find({ name: data.name })
             if (a.length != 0) 
                 return res.status(400).send({ status: false, msg: "This Name is already used." })
                 
