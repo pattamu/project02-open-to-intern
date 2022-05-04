@@ -35,12 +35,12 @@ const createCollege = async function (req, res) {
 
             if(data.logoLink && !urlRegEx.test(data.logoLink.trim()))
                 return res.status(400).send({ status: false, msg: "Please Enter a valid URL for the logoLink."})
-
-            let savedData = await collegeModel.create(data)
-                res.status(201).send({status: true, data: savedData })
             
             if (a.length != 0) 
                 return res.status(400).send({ status: false, msg: "This Name is already used." })
+                
+            let savedData = await collegeModel.create(data)
+                res.status(201).send({status: true, data: savedData })
         }
         else 
             res.status(400).send({status: false, msg: "Please Enter college details to create college Data." })
