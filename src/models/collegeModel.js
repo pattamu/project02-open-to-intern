@@ -10,7 +10,7 @@ const collegeSchema = new mongoose.Schema( {
             },
 
    fullName: {type: String, 
-               required: true ,
+               required: true,
                trim: true,
             }, 
 
