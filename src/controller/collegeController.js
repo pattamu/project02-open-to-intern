@@ -27,7 +27,11 @@ const createCollege = async function (req, res) {
         
         if (!validateName(data.name)) 
             return res.status(400).send({ status: false, msg: "plz enter valid short name of college" })
-        
+            
+        let a = await collegeModel.find({ name: data.name })
+        if (a.length != 0) 
+            return res.status(400).send({ status: false, msg: "This Name is already used." })
+
         if (!data.fullName) 
             return res.status(400).send({ status: false, msg: "plz enter fullName of the college" })
         
@@ -38,11 +42,7 @@ const createCollege = async function (req, res) {
 
         if(data.logoLink && !validateURL(data.logoLink))
             return res.status(400).send({ status: false, msg: "Please Enter a valid URL for the logoLink."})
-            
-        let a = await collegeModel.find({ name: data.name })
-        if (a.length != 0) 
-            return res.status(400).send({ status: false, msg: "This Name is already used." })
-            
+                        
         let savedData = await collegeModel.create(data)
             res.status(201).send({status: true, data: savedData })
     }
