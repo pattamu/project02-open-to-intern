@@ -17,7 +17,6 @@ const collegeSchema = new mongoose.Schema( {
    logoLink: {type:String,
                required: true,
                trim: true,
-               default: "https://functionup.s3.ap-south-1.amazonaws.com/colleges/iith.png",
             },
 
    isDeleted: {

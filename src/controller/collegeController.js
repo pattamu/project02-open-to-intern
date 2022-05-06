@@ -40,7 +40,7 @@ const createCollege = async function (req, res) {
         
         data.fullName = data.fullName.split(' ').map(x => x.charAt(0).toUpperCase() + x.slice(1).toLowerCase()).join(' ')
 
-        if(data.logoLink && !validateURL(data.logoLink))
+        if(!data.logoLink || !validateURL(data.logoLink))
             return res.status(400).send({ status: false, msg: "Please Enter a valid URL for the logoLink."})
                         
         let savedData = await collegeModel.create(data)
@@ -48,7 +48,7 @@ const createCollege = async function (req, res) {
     }
     catch (error) {
         console.log(error.message)
-        if(err.message.includes('E11000' && 'name'))
+        if(error.message.includes('E11000' && 'name'))
             return res.status(400).send({ status: false, msg: "Please enter a unique college name"})
         
         res.status(500).send({status: false, msg: error.message })
